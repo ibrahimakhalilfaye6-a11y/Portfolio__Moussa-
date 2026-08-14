@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mes Projets — Xalil Faye</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- CSS personnel -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+
+        <a class="navbar-logo" href="index.html">Mon PORTFOLIO</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">ACCUEIL</a></li>
+            <li class="nav-item"><a class="nav-link" href="a propos.html">À PROPOS</a></li>
+            <li class="nav-item"><a class="nav-link active" href="projets.html">MES PROJETS</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+          </ul>
+          <div class="d-flex align-items-center gap-2">
+            <input type="text" class="nav-search" placeholder="Rechercher..."/>
+            <button class="btn-mode" id="toggleMode">☀ Mode</button>
+          </div>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO PROJETS -->
+    <section class="projets-hero fade-in">
+      <div class="container text-center">
+        <p class="ap-label">Mes réalisations</p>
+        <h1 class="section-titre">Mes Projets</h1>
+        <div class="hero-ligne mx-auto"></div>
+        <p class="ap-description mx-auto">
+          Découvrez les projets sur lesquels j'ai travaillé,
+          des applications web aux interfaces design.
+        </p>
+
+        <!-- FILTRES -->
+        <div class="filtres-wrapper">
+          <button class="filtre active" data-filtre="tous">Tous</button>
+          <button class="filtre" data-filtre="web">Web</button>
+          <button class="filtre" data-filtre="design">Design</button>
+          <button class="filtre" data-filtre="python">Python</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRILLE PROJETS -->
+    <section class="projets-liste">
+      <div class="container">
+        <div class="row g-4" id="projetsGrille">
+
+          <div class="col-lg-4 col-md-6 col-filtrable fade-in">
+            <article class="card projet-carte h-100" data-categorie="web">
+              <div class="projet-image">🛒</div>
+              <div class="card-body projet-info">
+                <div class="projet-tags">
+                  <span class="badge-tag">HTML</span>
+                  <span class="badge-tag">CSS</span>
+                  <span class="badge-tag">JavaScript</span>
+                </div>
+                <h2 class="card-title">Site En Ligne</h2>
+                <p class="card-text">Boutique en ligne complète avec panier, gestion des produits et système de paiement intégré.</p>
+                <div class="projet-liens">
+                  <a href="Site de Vente.html" class="btn-or">Voir le projet</a>
+                  <a href="#" class="btn-contour">GitHub</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-filtrable fade-in">
+            <article class="card projet-carte h-100" data-categorie="web">
+              <div class="projet-image">🌤️</div>
+              <div class="card-body projet-info">
+                <div class="projet-tags">
+                  <span class="badge-tag">JavaScript</span>
+                  <span class="badge-tag">HTML</span>
+                  <span class="badge-tag">CSS</span>
+                </div>
+                <h2 class="card-title">Application Météo</h2>
+                <p class="card-text">Application web affichant la météo en temps réel pour n'importe quelle ville via une API externe.</p>
+                <div class="projet-liens">
+                  <a href="AppliMeteo.html" class="btn-or">Voir le projet</a>
+                  <a href="#" class="btn-contour">GitHub</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-filtrable fade-in">
+            <article class="card projet-carte h-100" data-categorie="design">
+              <div class="projet-image">💼</div>
+              <div class="card-body projet-info">
+                <div class="projet-tags">
+                  <span class="badge-tag">HTML</span>
+                  <span class="badge-tag">CSS</span>
+                </div>
+                <h2 class="card-title">Portfolio Personnel</h2>
+                <p class="card-text">Ce site portfolio conçu from scratch avec un design Ardoise & Or, responsive et moderne.</p>
+                <div class="projet-liens">
+                  <a href="index.html" class="btn-or">Voir le projet</a>
+                  <a href="#" class="btn-contour">GitHub</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-filtrable fade-in">
+            <article class="card projet-carte h-100" data-categorie="python">
+              <div class="projet-image">📊</div>
+              <div class="card-body projet-info">
+                <div class="projet-tags">
+                  <span class="badge-tag">HTML</span>
+                  <span class="badge-tag">CSS</span>
+                  <span class="badge-tag">JavaScript</span>
+                </div>
+                <h2 class="card-title">Formulaire d'Inscription</h2>
+                <p class="card-text">Interface de formulaire d'inscription en ligne avec validation et enregistrement des données.</p>
+                <div class="projet-liens">
+                  <a href="FormInscript.html" class="btn-or">Voir le projet</a>
+                  <a href="#" class="btn-contour">GitHub</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-filtrable fade-in">
+            <article class="card projet-carte h-100" data-categorie="web">
+              <div class="projet-image">🎓</div>
+              <div class="card-body projet-info">
+                <div class="projet-tags">
+                  <span class="badge-tag">HTML</span>
+                  <span class="badge-tag">CSS</span>
+                  <span class="badge-tag">JavaScript</span>
+                </div>
+                <h2 class="card-title">Site Gestion De Notes</h2>
+                <p class="card-text">Système de gestion des étudiants avec inscription, notes et tableau de bord administrateur.</p>
+                <div class="projet-liens">
+                  <a href="Gestion Des Notes.html" class="btn-or">Voir le projet</a>
+                  <a href="#" class="btn-contour">GitHub</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-filtrable fade-in">
+            <article class="card projet-carte h-100" data-categorie="design">
+              <div class="projet-image">🎨</div>
+              <div class="card-body projet-info">
+                <div class="projet-tags">
+                  <span class="badge-tag">HTML</span> 
+                  <span class="badge-tag">CSS</span>
+                </div>
+                <h2 class="card-title">Restaurantion</h2>
+                <p class="card-text">Conception d'une maquette Figma pour un site web de restauration.</p>
+                <div class="projet-liens">
+                  <a href="FastFood.html" class="btn-or">Voir le projet</a>
+                  <a href="#" class="btn-contour">Figma</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container text-center">
+      <p>© 2026 <span class="or">Serigne Moussa Sy</span> — Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- JS externe -->
+  <script src="script.js"></script>
+
+</body>
+</html>
