@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Météo Sénégal PRO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+    font-family: Arial;
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
+    text-align: center;
+    color: white;
+}
+
+.container {
+    margin-top: 80px;
+}
+
+input, select, button {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    background: white;
+    cursor: pointer;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 22px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🌍 Météo du Sénégal</h1>
+
+    <input type="text" id="search" placeholder="Rechercher une ville..." onkeyup="filterCities()">
+
+    <select id="city"></select>
+
+    <button onclick="getWeather()">Voir météo</button>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+    const cities = [
+    "Dakar","Thiès","Saint-Louis","Kaolack","Ziguinchor",
+    "Touba","Mbour","Rufisque","Tambacounda","Kolda",
+    "Louga","Fatick"
+];
+
+// remplir select
+const select = document.getElementById("city");
+
+cities.forEach(city => {
+    let option = document.createElement("option");
+    option.value = city;
+    option.textContent = city;
+    select.appendChild(option);
+});
+
+// filtrer recherche
+function filterCities() {
+    let input = document.getElementById("search").value.toLowerCase();
+    select.innerHTML = "";
+
+    cities
+    .filter(city => city.toLowerCase().includes(input))
+    .forEach(city => {
+        let option = document.createElement("option");
+        option.value = city;
+        option.textContent = city;
+        select.appendChild(option);
+    });
+}
+
+// météo fictive PRO
+function getWeather() {
+    let city = document.getElementById("city").value;
+
+    // température fictive réaliste Sénégal (20°C - 45°C)
+    let temp = Math.floor(Math.random() * 25) + 20;
+
+    let conditions = ["☀️ Ensoleillé", "⛅ Nuageux", "🌧️ Pluvieux"];
+    let weather = conditions[Math.floor(Math.random() * conditions.length)];
+
+    document.getElementById("result").innerHTML = `
+        <h2>${city}</h2>
+        <p>🌡️ Température : ${temp}°C</p>
+        <p>${weather}</p>
+    `;
+}
+</script>
+
+</body>
+</html>

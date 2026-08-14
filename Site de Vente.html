@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique Nova</title>
+    <style>
+     body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  color: #1f2937;
+}
+
+header {
+  background: #0f4c9a;
+  color: #fff;
+  padding: 18px;
+  text-align: center;
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  color: #fff;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+.grid-produits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.produit {
+  background: #fff;
+  border: 1px solid #dbe2ed;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.produit img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.prix {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #0b8a4a;
+}
+
+button {
+  margin-top: 8px;
+  border: none;
+  background: #1d6fd8;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #145ab3;
+}
+
+footer {
+  text-align: center;
+  padding: 18px;
+  background: #0f4c9a;
+  color: #fff;
+  margin-top: 30px;
+}
+</style>   
+       
+        }
+</head>
+<body>
+  <header>
+    <h1>Halal Shop</h1>
+    <nav>
+      <a href="#">Accueil</a>
+      <a href="#">Produits</a>
+      <a href="#">Panier</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Nos produits</h2>
+    <div class="grid-produits">
+      <div class="produit">
+        <img src="images/AirPods.jpeg" alt="AirPods Pro">
+        <h3>AirPods Pro</h3>
+        <p>Écouteurs sans fil haute qualité.</p>
+        <p class="prix">5000f</p>
+        <button>Ajouter au panier</button>
+      </div>
+
+      <div class="produit">
+        <img src="images/Apple Watch.jpeg" alt="Apple Watch">
+        <h3>Apple Watch</h3>
+        <p>Montre intelligente avec écran Retina.</p>
+        <p class="prix">15 000f</p>
+        <button>Ajouter au panier</button>
+      </div>
+
+      <div class="produit">
+        <img src="images/cable chargeur.jpeg" alt="Cable de charge">
+        <h3>Cable de charge</h3>
+        <p>Cable de charge de qualité supérieure.</p>
+        <p class="prix">2500f</p>
+        <button>Ajouter au panier</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Halal Shop – Conditions générales | Contact</p>
+  </footer>
+</body>
+</html>

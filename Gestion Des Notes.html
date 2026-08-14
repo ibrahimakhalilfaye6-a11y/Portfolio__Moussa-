@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion des Notes</title>
+  <style>
+:root {
+  --bleu-900: #0f4c9a;
+  --bleu-700: #1d6fd8;
+  --bleu-100: #eaf2ff;
+  --gris-100: #f6f8fc;
+  --gris-300: #d5deec;
+  --texte: #1f2937;
+  --ok-bg: #d8f5de;
+  --ok-txt: #146c3d;
+  --ko-bg: #ffe1e1;
+  --ko-txt: #a82020;
+  --wait-bg: #fff2cc;
+  --wait-txt: #8a6200;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; background: var(--gris-100); color: var(--texte); }
+header, footer { text-align: center; padding: 16px; background: var(--bleu-900); color: #fff; }
+main { max-width: 1050px; margin: 24px auto; padding: 0 16px; }
+section { background: #fff; border: 1px solid var(--gris-300); border-radius: 10px; padding: 16px; margin-bottom: 18px; }
+.filtres { list-style: none; padding: 0; display: flex; gap: 8px; flex-wrap: wrap; }
+.filtre { border: 1px solid var(--gris-300); background: #fff; padding: 8px 12px; border-radius: 999px; cursor: pointer; }
+.filtre.actif { background: var(--bleu-700); color: #fff; border-color: var(--bleu-700); }
+.table-responsive { overflow-x: auto; }
+.etudiants { width: 100%; border-collapse: collapse; min-width: 700px; }
+.etudiants th, .etudiants td { border: 1px solid var(--gris-300); padding: 10px; text-align: left; }
+.etudiants thead th { background: var(--bleu-900); color: #fff; }
+.etudiants tbody tr:nth-child(even) { background: #f7faff; }
+.etudiants tbody tr:hover { background: #eaf2ff; }
+.badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-weight: 700; font-size: 0.85rem; }
+.badge.admis   { background: var(--ok-bg);   color: var(--ok-txt); }
+.badge.refuse  { background: var(--ko-bg);   color: var(--ko-txt); }
+.badge.attente { background: var(--wait-bg); color: var(--wait-txt); }
+#ajout-etudiant { background: var(--bleu-100); }
+form { display: grid; gap: 8px; }
+input, select { border: 1px solid #bfcbe0; border-radius: 6px; padding: 9px; font: inherit; }
+button[type="submit"] { margin-top: 8px; border: none; background: var(--bleu-700); color: #fff; padding: 10px 14px; border-radius: 8px; cursor: pointer; }
+button[type="submit"]:hover { background: #145ab3; }
+.succes { margin-top: 10px; padding: 10px; background: var(--ok-bg); color: var(--ok-txt); border-radius: 6px; display: none; }
+.statut-auto { padding: 8px 12px; border-radius: 6px; font-weight: bold; display: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Gestion des Notes</h1>
+  </header>
+  <main>
+    <section id="liste-etudiants">
+      <h2>Liste des étudiants</h2>
+      <ul class="filtres">
+        <li><button class="filtre actif" type="button" data-statut="tous">Tous</button></li>
+        <li><button class="filtre" type="button" data-statut="admis">Admis</button></li>
+        <li><button class="filtre" type="button" data-statut="refuse">Refusés</button></li>
+        <li><button class="filtre" type="button" data-statut="attente">En attente</button></li>
+      </ul>
+      <div class="table-responsive">
+        <table class="etudiants">
+          <thead>
+            <tr><th>Nom</th><th>Prénom</th><th>Filière</th><th>Note</th><th>Statut</th></tr>
+          </thead>
+          <tbody>
+            <tr data-statut="admis"><td>Diop</td><td>Aminata</td><td>Informatique</td><td>15.5</td><td><span class="badge admis">Admis</span></td></tr>
+            <tr data-statut="refuse"><td>Fall</td><td>Moussa</td><td>Réseaux</td><td>8.5</td><td><span class="badge refuse">Refusé</span></td></tr>
+            <tr data-statut="attente"><td>Ndiaye</td><td>Fatou</td><td>Web Design</td><td>12</td><td><span class="badge attente">En attente</span></td></tr>
+            <tr data-statut="admis"><td>Sarr</td><td>Ibrahima</td><td>Informatique</td><td>17</td><td><span class="badge admis">Admis</span></td></tr>
+            <tr data-statut="attente"><td>Ba</td><td>Khady</td><td>Cybersécurité</td><td>10</td><td><span class="badge attente">En attente</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="ajout-etudiant">
+      <h2>Ajouter un étudiant</h2>
+      <form id="form-ajout">
+        <label for="prenom">Prénom</label>
+        <input type="text" id="prenom" name="prenom" required>
+
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" name="nom" required>
+
+        <label for="filiere">Filière</label>
+        <select id="filiere" name="filiere" required>
+          <option value="">Choisir...</option>
+          <option>Informatique</option>
+          <option>Réseaux</option>
+          <option>Web Design</option>
+          <option>Cybersécurité</option>
+        </select>
+
+        <label for="note">Note (0-20)</label>
+        <input type="number" id="note" name="note" min="0" max="20" step="0.5" required>
+
+        <!-- Statut automatique affiché en temps réel -->
+        <div id="statut-auto" class="statut-auto"></div>
+
+        <button type="submit">Ajouter</button>
+        <div class="succes" id="msg-succes">✅ Étudiant ajouté avec succès !</div>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2026 Gestion des Notes. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+  // ── Filtres ──────────────────────────────────────────────
+  const boutons = document.querySelectorAll('.filtre');
+  const tbody   = document.querySelector('.etudiants tbody');
+
+  function appliquerFiltre() {
+    const actif  = document.querySelector('.filtre.actif');
+    const filtre = actif ? actif.getAttribute('data-statut') : 'tous';
+    document.querySelectorAll('.etudiants tbody tr').forEach(ligne => {
+      const statut = ligne.getAttribute('data-statut');
+      ligne.style.display = (filtre === 'tous' || statut === filtre) ? '' : 'none';
+    });
+  }
+
+  boutons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      boutons.forEach(b => b.classList.remove('actif'));
+      btn.classList.add('actif');
+      appliquerFiltre();
+    });
+  });
+
+  // ── Déterminer le statut selon la note ───────────────────
+  function determinerStatut(note) {
+    if (note >= 12) return 'admis';
+    if (note >= 10) return 'attente';
+    return 'refuse';
+  }
+
+  const labelStatut = { admis: 'Admis', refuse: 'Refusé', attente: 'En attente' };
+
+  // ── Aperçu du statut en temps réel ───────────────────────
+  const inputNote   = document.getElementById('note');
+  const divStatut   = document.getElementById('statut-auto');
+
+  inputNote.addEventListener('input', () => {
+    const note = parseFloat(inputNote.value);
+    if (isNaN(note) || inputNote.value === '') {
+      divStatut.style.display = 'none';
+      return;
+    }
+    const statut = determinerStatut(note);
+    divStatut.className = 'statut-auto badge ' + statut;
+    divStatut.style.display = 'inline-block';
+    divStatut.textContent = '→ Statut : ' + labelStatut[statut];
+  });
+
+  // ── Ajout d'un étudiant ───────────────────────────────────
+  const form      = document.getElementById('form-ajout');
+  const msgSucces = document.getElementById('msg-succes');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const prenom  = document.getElementById('prenom').value.trim();
+    const nom     = document.getElementById('nom').value.trim();
+    const filiere = document.getElementById('filiere').value;
+    const note    = parseFloat(document.getElementById('note').value);
+    const statut  = determinerStatut(note);
+
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-statut', statut);
+    tr.innerHTML = `
+      <td>${nom}</td>
+      <td>${prenom}</td>
+      <td>${filiere}</td>
+      <td>${note}</td>
+      <td><span class="badge ${statut}">${labelStatut[statut]}</span></td>
+    `;
+    tbody.appendChild(tr);
+
+    appliquerFiltre();
+
+    msgSucces.style.display = 'block';
+    setTimeout(() => msgSucces.style.display = 'none', 3000);
+
+    form.reset();
+    divStatut.style.display = 'none';
+  });
+  </script>
+</body>
+</html>
